@@ -1,0 +1,69 @@
+﻿@using MvcStok.Models.Entity
+@model List<TBLURUNLER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ÜRÜN ID</th>
+            <th>ÜRÜN ADI</th>
+            <th>MARKASI</th>
+            <th>KATEGORİ</th>
+            <th>FİYAT</th>
+            <th>KALAN STOK</th>
+            <th>SİL</th>
+            <th>FİYAT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var urn in Model)
+        {
+            <tr>
+                <th>@urn.URUNID</th>
+                <td>@urn.URUNAD</td>
+                <td>@urn.MARKA</td>
+                <td>@urn.TBLKATEGORILER.KATEGORIAD</td>
+                <td>@urn.FIYAT</td>
+                <td>@urn.STOK</td>
+                <td><a href="/URUN/SIL/@urn.URUNID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/URUN/UrunGetir/@urn.URUNID" class="btn btn-success">GÜNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/URUN/URUNEKLE/" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/fixedColumns.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl1').DataTable({
+        language: {
+            "sDecimal": ",",
+            "sEmptyTable": "Tabloda Herhangi Bir Veri Mevcut Değil!",
+            "sInfo": "_TOTAL_ Kayıt Bulunuyor",
+            "sInfoEmpty": "Kayıt Yok",
+            "sInfoFiltered": "(_MAX_ Kayıt İçerisinden Bulunan)",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Sayfada _MENU_ Kayıt Göster",
+            "sLoadingRecords": "Yükleniyor...",
+            "sProcessing": "İşleniyor...",
+            "sSearch": "Ara:",
+            "sZeroRecords": "Eşleşen Kayıt Bulunamadı",
+            "oPaginate": {
+                "sFirst": "İlk",
+                "sLast": "Son",
+                "sNext": "Sonraki",
+                "sPrevious": "Önceki"
+            },
+            "oAria": {
+                "sSortAscending": ": Artan Sütun Sıralamasını Aktifleştir",
+                "sSortDescending": ": Azalan Sütun Sıralamasını Aktifleştir"
+            }
+        }
+    });
+</script>
